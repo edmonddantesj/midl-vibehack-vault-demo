@@ -1,10 +1,11 @@
-import { type Config, regtest } from "@midl/core";
+import { type Config, MaestroSymphonyProvider, regtest } from "@midl/core";
 import { createMidlConfig } from "@midl/satoshi-kit";
 import { QueryClient } from "@tanstack/react-query";
 
 export const midlConfig = createMidlConfig({
 	networks: [regtest],
 	persist: true,
+	runesProvider: new MaestroSymphonyProvider(),
 }) as Config;
 
 export const queryClient = new QueryClient({
