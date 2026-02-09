@@ -54,11 +54,16 @@ export const Deposit = () => {
 
 	const { rune } = useRuneStore();
 	// biome-ignore lint/style/noNonNullAssertion: Rune is defined if the user has selected a rune
-	const { erc20Address, rune: runeMetadata } = useERC20Rune(rune!, {
-		query: {
-			enabled: Boolean(rune),
+	const { erc20Address: erc20Result, rune: runeMetadata } = useERC20Rune(
+		rune!,
+		{
+			query: {
+				enabled: Boolean(rune),
+			},
 		},
-	});
+	);
+
+	const erc20Address = erc20Result?.[0];
 
 	const handleSubmit = (data: FormData) => {
 		if (

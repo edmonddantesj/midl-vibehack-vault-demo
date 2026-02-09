@@ -16,7 +16,7 @@ export default (<HardhatUserConfig>{
 				btcConfirmationsRequired: 1,
 				hardhatNetwork: "regtest",
 				network: {
-					explorerUrl: "https://mempool.regtest.midl.xyz",
+					explorerUrl: "https://mempool.staging.midl.xyz",
 					id: "regtest",
 					network: "regtest",
 				},
@@ -38,8 +38,8 @@ export default (<HardhatUserConfig>{
 				network: "regtest",
 				chainId: midlRegtest.id,
 				urls: {
-					apiURL: "https://blockscout.regtest.midl.xyz/api",
-					browserURL: "https://blockscout.regtest.midl.xyz",
+					apiURL: "https://blockscout.staging.midl.xyz/api",
+					browserURL: "https://blockscout.staging.midl.xyz",
 				},
 			},
 		],

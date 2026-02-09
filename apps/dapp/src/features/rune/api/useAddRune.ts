@@ -1,6 +1,10 @@
-import { calculateTransactionsCost, multisigAddress } from "@midl/executor";
-import { useBTCFeeRate } from "@midl/executor-react";
-import { useConfig, useEdictRune, useWaitForTransaction } from "@midl/react";
+import {
+	useAddRuneERC20Intention,
+	useFinalizeBTCTransaction,
+	useSignIntention,
+} from "@midl/executor-react";
+import { useWaitForTransaction } from "@midl/react";
+import { usePublicClient } from "wagmi";
 
 type UseAddRuneParams = {
 	mutation?: NonNullable<
@@ -9,46 +13,33 @@ type UseAddRuneParams = {
 };
 
 export const useAddRune = ({ mutation }: UseAddRuneParams) => {
-	const { edictRune, ...rest } = useEdictRune({
-		mutation: {
-			onSuccess: (data) => {
-				waitForTransaction({
-					txId: data.tx.id,
-				});
-			},
-		},
-	});
-	const { network } = useConfig();
-	const { data: feeRate } = useBTCFeeRate();
+	const { addRuneERC20Async, ...rest } = useAddRuneERC20Intention();
+	const { finalizeBTCTransactionAsync } = useFinalizeBTCTransaction();
+	const { signIntentionAsync } = useSignIntention();
+	const publicClient = usePublicClient();
 	const { waitForTransaction, ...restWait } = useWaitForTransaction({
 		mutation,
 	});
 
-	const addRune = (runeId: string) => {
-		if (!feeRate) {
-			throw new Error("Fee rate is not available");
-		}
-
-		// Calculate the mint fee based on the current fee rate and the rune deposit
-		const mintFee = calculateTransactionsCost(0n, {
-			feeRate: Number(feeRate),
-			hasRunesDeposit: true,
+	const addRune = async (runeId: string) => {
+		const intention = await addRuneERC20Async({
+			runeId,
+			reset: true,
 		});
 
-		edictRune({
-			transfers: [
-				{
-					receiver: multisigAddress[network.id],
-					amount: mintFee,
-				},
-				{
-					runeId,
-					amount: 1n,
-					receiver: multisigAddress[network.id],
-				},
-			],
-			publish: true,
+		const { tx } = await finalizeBTCTransactionAsync();
+
+		const signedTransaction = await signIntentionAsync({
+			intention,
+			txId: tx.id,
 		});
+
+		await publicClient?.sendBTCTransactions({
+			serializedTransactions: [signedTransaction],
+			btcTransaction: tx.hex,
+		});
+
+		waitForTransaction({ txId: tx.id });
 	};
 
 	return {

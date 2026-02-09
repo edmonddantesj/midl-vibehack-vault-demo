@@ -38,20 +38,19 @@ export default function Home() {
 						<div>
 							Block explorer:{" "}
 							<Link
-								href="https://blockscout.regtest.midl.xyz
-"
+								href="https://blockscout.staging.midl.xyz"
 								className="text-blue-500 hover:text-blue-700"
 							>
-								https://blockscout.regtest.midl.xyz
+								https://blockscout.staging.midl.xyz
 							</Link>
 						</div>
 						<div>
 							Bitcoin Block Explorer:{" "}
 							<Link
-								href="https://mempool.regtest.midl.xyz"
+								href="https://mempool.staging.midl.xyz"
 								className="text-blue-500 hover:text-blue-700"
 							>
-								https://mempool.regtest.midl.xyz
+								https://mempool.staging.midl.xyz
 							</Link>
 						</div>
 					</CardDescription>
