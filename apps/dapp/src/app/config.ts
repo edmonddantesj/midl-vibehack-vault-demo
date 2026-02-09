@@ -5,7 +5,7 @@ import { QueryClient } from "@tanstack/react-query";
 export const midlConfig = createMidlConfig({
 	networks: [regtest],
 	persist: true,
-	runesProvider: new MaestroSymphonyProvider(),
+	runesProvider: new MaestroSymphonyProvider({regtest: "https://runes.staging.midl.xyz"}),
 }) as Config;
 
 export const queryClient = new QueryClient({

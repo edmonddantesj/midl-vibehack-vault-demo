@@ -28,11 +28,13 @@ export const VaultInfo = () => {
 	const { rune: runeId } = useRuneStore();
 
 	// biome-ignore lint/style/noNonNullAssertion: runeId is defined if the user has selected a rune
-	const { erc20Address: token } = useERC20Rune(runeId!, {
+	const { erc20Address: erc20Result } = useERC20Rune(runeId!, {
 		query: {
 			enabled: Boolean(runeId),
 		},
 	});
+
+	const token = erc20Result?.[0];
 
 	// This is just a showcase of how to get rune from the token address.
 	const { rune } = useToken(token as `0x${string}`, {
@@ -77,7 +79,7 @@ export const VaultInfo = () => {
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<Link
-								href={`https://blockscout.regtest.midl.xyz/address/${address}`}
+								href={`https://blockscout.staging.midl.xyz/address/${address}`}
 								className="text-sm font-medium text-blue-500 hover:text-blue-700"
 								target="_blank"
 							>

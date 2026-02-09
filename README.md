@@ -39,7 +39,7 @@ Once the dApp is running, you can interact with it through your web browser. The
 Ensure you have Runes in your wallet and they have been added to the MIDL ecosystem.
 
 1. Install the [XVerse wallet](https://xverse.app/) to manage your Runes and connect to the dApp.
-2. Get tBTC from the [MIDL Faucet](https://faucet.regtest.midl.xyz/).
+2. Get tBTC from the [MIDL Faucet](https://faucet.staging.midl.xyz/).
 3. Etch (mint) Runes with [MIDL Token Minter](https://runes.midl.xyz/)
 
 ##### Steps to interact with the dApp
@@ -47,5 +47,5 @@ Ensure you have Runes in your wallet and they have been added to the MIDL ecosys
 1. Open your browser and navigate to `http://localhost:3000`.
 2. Connect your wallet (e.g., XVerse).
 3. Use the dApp to deposit and withdraw Runes (ERC20 tokens) from the vault.
-4. You can view the transaction history on (Mempool)(http://mempool.regtest.midl.xyz) and on the [MIDL Explorer](https://blockscout.regtest.midl.xyz/).
+4. You can view the transaction history on (Mempool)(http://mempool.staging.midl.xyz) and on the [MIDL Explorer](https://blockscout.staging.midl.xyz/).
 

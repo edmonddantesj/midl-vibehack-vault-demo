@@ -35,12 +35,16 @@ export function RuneSelect() {
 
 	const selectedRune = runes?.results.find((rune) => rune.rune.id === value);
 
-	const { erc20Address, erc20State, rune, state } = useERC20Rune(
-		selectedRune?.rune.id as string,
-		{
-			query: { enabled: Boolean(selectedRune?.rune.id) },
-		},
-	);
+	const {
+		erc20Address: erc20Result,
+		erc20State,
+		rune,
+		state,
+	} = useERC20Rune(selectedRune?.rune.id as string, {
+		query: { enabled: Boolean(selectedRune?.rune.id) },
+	});
+
+	const erc20Address = erc20Result?.[0];
 
 	const { addRune, isPending, waitState } = useAddRune({
 		mutation: {
