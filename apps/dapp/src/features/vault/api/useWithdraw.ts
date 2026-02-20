@@ -10,6 +10,10 @@ import { type UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { encodeFunctionData } from "viem";
 import { usePublicClient } from "wagmi";
 
+type UseWithdrawReturn = {
+	txId: string;
+};
+
 type UseWithdrawVariables = {
 	amount: bigint;
 	runeId: string;
@@ -17,7 +21,7 @@ type UseWithdrawVariables = {
 };
 type UseWithdrawParams = {
 	mutation?: Omit<
-		UseMutationOptions<void, Error, UseWithdrawVariables>,
+		UseMutationOptions<UseWithdrawReturn, Error, UseWithdrawVariables, UseWithdrawVariables>,
 		"mutationFn"
 	>;
 };
@@ -75,6 +79,7 @@ export const useWithdraw = ({ mutation }: UseWithdrawParams = {}) => {
 			});
 
 			await waitForTransactionAsync({ txId: tx.id });
+			return { txId: tx.id };
 		},
 		...mutation,
 	});

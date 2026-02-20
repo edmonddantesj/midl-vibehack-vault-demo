@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { Web3Provider } from "@/global";
 import { Header } from "@/widgets";
+import { TxProofProvider } from "@/shared";
 import "@midl/satoshi-kit/styles.css";
 import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
@@ -31,9 +32,11 @@ export default function RootLayout({
 		<html lang="en">
 			<Web3Provider>
 				<body className={`${inter.variable} ${geistMono.variable} bg-muted`}>
-					<Header />
-					<div className="mx-auto max-w-5xl px-4 py-6">{children}</div>
-					<Toaster />
+					<TxProofProvider>
+						<Header />
+						<div className="mx-auto max-w-5xl px-4 py-6">{children}</div>
+						<Toaster />
+					</TxProofProvider>
 				</body>
 			</Web3Provider>
 		</html>

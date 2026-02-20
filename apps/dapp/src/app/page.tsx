@@ -7,6 +7,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TxProofPanel } from "@/shared/tx-proof";
 import { Deposit, VaultInfo, Withdraw } from "@/widgets";
 import { RuneSelect } from "@/widgets/rune-select/RuneSelect";
 
@@ -74,6 +75,7 @@ export default function Home() {
 					</Tabs>
 				</CardContent>
 			</Card>
+			<TxProofPanel />
 		</div>
 	);
 }

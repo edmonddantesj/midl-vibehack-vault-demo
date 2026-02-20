@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRuneStore } from "@/features";
+import { useTxProof } from "@/shared/tx-proof";
 import { useDeposit } from "@/features/vault";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useERC20Rune } from "@midl/executor-react";
@@ -32,16 +33,26 @@ type FormData = z.infer<typeof formSchema>;
 
 export const Deposit = () => {
 	const client = useQueryClient();
+	const { recordSuccess, recordError } = useTxProof();
+
+
 
 	const { deposit, isPending } = useDeposit({
 		mutation: {
-			onSuccess: () => {
+			onSuccess: (data, variables) => {
 				form.reset();
 				toast.success("Deposit successful!");
+				recordSuccess({
+					kind: "deposit",
+					txId: data?.txId || "-",
+					runeId: variables.runeId,
+					amount: variables.amount.toString(),
+				});
 				client.invalidateQueries();
 			},
 			onError: (error, variables) => {
 				console.error("Deposit failed:", error, variables);
+				recordError("deposit", variables?.runeId || "-", variables?.amount?.toString() || "-", String(error));
 				toast.error("Deposit failed. See console for details.");
 			},
 		},

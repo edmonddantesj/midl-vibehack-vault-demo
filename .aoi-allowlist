@@ -1,0 +1,17 @@
+# AOI GUARD allowlist (repo-local)
+# Scope for MIDL hackathon submission hardening work.
+
+# Explicitly changed files
+MIDL_SUBMISSION_SLEEP_PACK.md
+apps/dapp/src/app/layout.tsx
+apps/dapp/src/app/page.tsx
+apps/dapp/src/features/vault/api/useDeposit.ts
+apps/dapp/src/features/vault/api/useWithdraw.ts
+apps/dapp/src/shared/index.ts
+apps/dapp/src/shared/tx-proof/
+apps/dapp/src/widgets/deposit/Deposit.tsx
+apps/dapp/src/widgets/withdraw/Withdraw.tsx
+
+# Existing repo baseline allowlist
+.aoi-allowlist
+.gitignore

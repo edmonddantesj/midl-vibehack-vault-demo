@@ -9,6 +9,10 @@ import { type UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { encodeFunctionData, erc20Abi } from "viem";
 import { usePublicClient } from "wagmi";
 
+type UseDepositReturn = {
+	txId: string;
+};
+
 type UseDepositVariables = {
 	amount: bigint;
 	runeId: string;
@@ -16,7 +20,7 @@ type UseDepositVariables = {
 };
 type UseDepositParams = {
 	mutation?: Omit<
-		UseMutationOptions<void, Error, UseDepositVariables>,
+		UseMutationOptions<UseDepositReturn, Error, UseDepositVariables, UseDepositVariables>,
 		"mutationFn"
 	>;
 };
@@ -84,6 +88,7 @@ export const useDeposit = ({ mutation }: UseDepositParams = {}) => {
 			});
 
 			await waitForTransactionAsync({ txId: tx.id });
+			return { txId: tx.id };
 		},
 		...mutation,
 	});
