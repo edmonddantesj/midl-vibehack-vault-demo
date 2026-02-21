@@ -18,3 +18,5 @@ apps/dapp/src/widgets/withdraw/Withdraw.tsx
 README.md
 apps/dapp/next-env.d.ts
 packages/contracts/deployments/
+
+packages/contracts/deployments/Vault.json
