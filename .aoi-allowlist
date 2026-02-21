@@ -15,3 +15,6 @@ apps/dapp/src/widgets/withdraw/Withdraw.tsx
 # Existing repo baseline allowlist
 .aoi-allowlist
 .gitignore
+README.md
+apps/dapp/next-env.d.ts
+packages/contracts/deployments/
